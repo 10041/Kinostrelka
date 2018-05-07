@@ -17,10 +17,14 @@ module.exports = (Sequelize, config) => {
     );
   
     const Videos = require('../models/videos')(Sequelize, sequelize);
-  
+    const Films = require('../models/films')(Sequelize, sequelize);
+
+    Videos.belongsTo(Films);
+
     return {
       videos: Videos,
-  
+      films: Films,
+
       sequelize,
       Sequelize,
     };
