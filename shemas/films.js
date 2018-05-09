@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const defaultShema = {
+const defaultSchema = {
     name: joi.string().required(),
     name_original: joi.string(),
     genre: joi.string().required(),
@@ -19,7 +19,7 @@ const defaultShema = {
     company: joi.string(),
 };
 
-const notRequiredShema = {
+const notRequiredSchema = {
     name: joi.string(),
     name_original: joi.string(),
     genre: joi.string(),
@@ -38,7 +38,7 @@ const notRequiredShema = {
     company: joi.string(),
 }
 
-const onlyIdShema = {
+const onlyIdSchema = {
     id: joi
         .number()
         .min(0)
@@ -57,7 +57,7 @@ module.exports = {
     },
   
     update: {
-      body: notRequiredShema,
+      body: notRequiredSchema,
       params: onlyIdSchema
     },
   

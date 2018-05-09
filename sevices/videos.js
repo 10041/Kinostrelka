@@ -29,3 +29,5 @@ class VideosService extends CrudService {
         })
     }
 }
+
+module.exports = VideosService;

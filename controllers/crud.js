@@ -14,6 +14,7 @@ class CrudController {
     this.delete = this.delete.bind(this);
 
     this.router = express.Router();
+    
     this.routes = {
       "/": [
         { method: "get", cb: this.readAll, schema: this.schema.readAll },
