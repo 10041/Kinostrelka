@@ -1,12 +1,14 @@
 const uuidv4 = require('uuid-v4');
 const multer = require('multer');
-
+const rootPath = require('app-root-path')
 
 
 module.exports = (path) => {    
     const storage = multer.diskStorage({
-        destination: `../image/${path}`,
-        filename: function (req, file, cb){
+        destination :function ( req , file , cb ) {
+            cb(null,  `${rootPath}/images/${path}`)
+        },
+        filename : function (req, file, cb){
             cb(null, `${uuidv4()}.${file.mimetype.split('/')[1]}`);
         }
     });

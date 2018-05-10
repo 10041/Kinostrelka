@@ -1,6 +1,7 @@
 const express = require("express");
 const asyncErrorHandler = require("../helpers/asyncErrorHandler");
 const joiValidator = require("express-joi-validator");
+const next = require('../helpers/emptyFuction');
 
 class CrudController {
   constructor(service, schema) {
@@ -59,29 +60,11 @@ class CrudController {
       if (!handlers || !Array.isArray(handlers)) return;
 
       for (let handler of handlers) {
-        // handler.img ? this.router[handler.method](
-        //   route, 
-        //   joiValidator(handler.schema), 
-        //   asyncErrorHandler(handler.img), 
-        //   asyncErrorHandler(handler.cb))
-        //   :
-        // this.router[handler.method](
-        //         route, 
-        //         joiValidator(handler.schema),
-        //         asyncErrorHandler(handler.cb));
-        if(handler.img){
-          this.router[handler.method](
-              route, 
-              joiValidator(handler.schema), 
-              handler.img, 
-              asyncErrorHandler(handler.cb));
-        }
-        else{
-           this.router[handler.method](
-                route, 
-                joiValidator(handler.schema),
-                asyncErrorHandler(handler.cb));
-        }
+        this.router[handler.method](
+          route, 
+          joiValidator(handler.schema), 
+          handler.img || next,
+          asyncErrorHandler(handler.cb));
       }
     });
   }

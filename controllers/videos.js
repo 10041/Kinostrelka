@@ -15,29 +15,29 @@ class VideosController extends CrudController{
             ],
             "/:id/unbind": [
                 { method: "delete", cb: this.unbindVideo }
-            ],
-            
+            ]
         };
         this.routes["/"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg});
-        console.log(this.routes);
+        this.routes["/:id"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg});
+
         this.registerRoutes();
     }
 
     async bindVideo(req, resp) {
         const filmId = req.params.filmId;
         const id = req.params.id;
-    
         resp.send(await this.service.bindVideo(id, filmId));
     }
     
     async unbindVideo(req, resp) {
         const id = req.params.id;
-    
         resp.send(await this.service.unbindVideo(id));
     }
 
     async uploadImg(req, res, next){
         console.log(req.file);
+        console.log(req.body);
+        req.body.preview_path = req.file.filename
         next();
     }
 }

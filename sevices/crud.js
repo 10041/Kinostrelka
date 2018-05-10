@@ -55,12 +55,15 @@ class CrudService {
 	}
 
 	async update(id, data) {
+
+		id = parseInt(id);
 		await this.repository.update(data, { where: { id }, limit: 1 });
 
 		return await this.read(id);
 	}
 
 	async delete(id) {
+		id = parseInt(id);
 		return await this.repository.destroy({ where: { id } });
 	}
 }
