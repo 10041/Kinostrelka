@@ -21,5 +21,6 @@ module.exports = (Sequelize, sequelize) => {
       operator: Sequelize.STRING,
       producer: Sequelize.STRING,
       company: Sequelize.STRING,
+      preview_path: Sequelize.STRING,
     });
   };

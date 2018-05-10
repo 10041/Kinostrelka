@@ -14,7 +14,7 @@ class CrudController {
     this.delete = this.delete.bind(this);
 
     this.router = express.Router();
-    
+
     this.routes = {
       "/": [
         { method: "get", cb: this.readAll, schema: this.schema.readAll },
@@ -59,7 +59,29 @@ class CrudController {
       if (!handlers || !Array.isArray(handlers)) return;
 
       for (let handler of handlers) {
-        this.router[handler.method](route, joiValidator(handler.schema), asyncErrorHandler(handler.cb));
+        // handler.img ? this.router[handler.method](
+        //   route, 
+        //   joiValidator(handler.schema), 
+        //   asyncErrorHandler(handler.img), 
+        //   asyncErrorHandler(handler.cb))
+        //   :
+        // this.router[handler.method](
+        //         route, 
+        //         joiValidator(handler.schema),
+        //         asyncErrorHandler(handler.cb));
+        if(handler.img){
+          this.router[handler.method](
+              route, 
+              joiValidator(handler.schema), 
+              handler.img, 
+              asyncErrorHandler(handler.cb));
+        }
+        else{
+           this.router[handler.method](
+                route, 
+                joiValidator(handler.schema),
+                asyncErrorHandler(handler.cb));
+        }
       }
     });
   }

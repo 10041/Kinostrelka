@@ -22,7 +22,7 @@ module.exports = (db, config) => {
         videosShema,
         filmsShema,
     )
-
+    app.use("/", express.static('./public'));
     app.use(bodyParser.json());
     app.use("/", apiController);
     app.use("/", error);
