@@ -1,11 +1,11 @@
 const joi = require('joi');
 
 const defaultSchema = {
-    //link: joi.string().required(),
-    //preview_path: joi.string().required(),
-    //preview_text: joi.string().required(),
+    link: joi.string().required(),
+    preview_path: joi.string().required(),
+    preview_text: joi.string().required(),
     filmId: joi.number().min(0),
-    file: joi.object()
+    file: joi.object().required()
 };
 
 const notRequiredSchema = {
@@ -13,7 +13,7 @@ const notRequiredSchema = {
     preview_path: joi.string(),
     preview_text: joi.string(),
     filmId: joi.number().min(0),
-    file: joi.object()
+    file: joi.object().required()
 }
 
 const onlyIdSchema = {
