@@ -17,6 +17,7 @@ const defaultSchema = {
     operator: joi.string(),
     producer: joi.string(),
     company: joi.string(),
+    file: joi.object()
 };
 
 const notRequiredSchema = {
@@ -36,6 +37,7 @@ const notRequiredSchema = {
     operator: joi.string(),
     producer: joi.string(),
     company: joi.string(),
+    file: joi.object()
 }
 
 const onlyIdSchema = {

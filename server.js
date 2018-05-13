@@ -22,8 +22,12 @@ module.exports = (db, config) => {
         videosShema,
         filmsShema,
     )
-    app.use("/", express.static('./public'));
+
     app.use(bodyParser.json());
+    app.use("/", express.static(__dirname + '/views'));
+    app.use(express.static(__dirname + './images/films'));
+    app.use(express.static(__dirname + './images/videos'));
+
     app.use("/", apiController);
     app.use("/", error);
 

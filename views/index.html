@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="./site.css"> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+    <title>kinostrelka</title>
+</head>
+<body>
+    <form action="/videos" method="POST" enctype="multipart/form-data">
+        <input name="file" type="file">
+        <input name="link" type="text">
+        <input name="preview_text" type="text">
+        <input type="submit">
+    </form>
+
+    <form action="http://localhost:3000/films/" method="POST" enctype="multipart/form-data">
+        название <br/>
+        <input id="name" name="name" type="text" />
+        <br/>
+        жанр<br/>
+        <input id="genre" name="genre" type="text" />
+        <br/>
+        страна<br/>
+        <input id="country" name="country" type="text" />
+        <br/>
+        возрастное ограничение<br/>
+        <input id="age_limit" name="age_limit" type="text" />
+        <br/>
+        сюжет<br/>
+        <input id="plot" name="plot" type="text" />
+        <br/>
+        дата релиза в мире<br/>
+        <input id="release_date" name="release_date" type="text" />
+        <br/>
+        дата релиза в Бел<br/>
+        <input id="release_bel" name="release_bel" type="text" />
+        <br/>
+        дата релиза в Росс<br/>
+        <input id="release_rus" name="release_rus" type="text" />
+        <br/>
+        в ролях<br/>
+        <input id="in_roles" name="in_roles" type="text" />
+        <br/>
+        режиссер<br/>
+        <input id="director" name="director" type="text" />
+        <br/>
+        превью<br/>
+        <input id="file" name="file" type="file" /><br/>
+        <input type="submit">
+    </form>
+
+    
+    <div id="pagination"/>
+    <hr>
+    <div id="films"/>
+
+    <script type='text/javascript'>
+        axios.get('/films')
+        .then((resp) => {
+            console.log(resp);
+            resp.data.forEach(el => {
+                var filmList = document.getElementById('films');
+                var a = document.createElement('a');
+                var img = document.createElement('img');
+
+                a.href = `/films/${el.id}/videos`;
+
+                img.src = `/images/films/${el.preview_path}`;
+                img.height = 50;
+                img.width = 50
+
+                a.appendChild(img);
+                a.innerHTML = a.innerHTML+ el.name;
+                filmList.appendChild(a);
+            });
+            //document.getElementById('films').innerHTML = resp.data[0].id;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+        function addFilm(){
+            var formData = new FormData();
+            //var imagefile = document.querySelector('#file');
+            formData.append("file", document.getElementById('file').files[0]);
+            formData.append("name_film", document.getElementById('name_film'));
+            console.log(formData);
+            axios.post('/films', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+
+        
+    </script>
+</body>
+</html>

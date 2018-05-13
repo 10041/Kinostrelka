@@ -1,0 +1,53 @@
+h1 Hello bleat
+
+script(src="https://unpkg.com/axios/dist/axios.min.js")
+
+script(type="text/javascript")
+    -console.log('hello');
+
+script(type="text/javascript" src=`${__dirname}views/script.js`)
+
+    
+
+form(action=`${uri}films/` method="POST" enctype="multipart/form-data")
+    p название 
+        br
+        input(name="name_film", type="text")
+    p жанр
+        br 
+        input(name="genre", type="text")
+    p страна
+        br
+        input(name="country", type="text")
+    p возрастное ограничение
+        br
+        input(name="age_limit", type="text")
+    p сюжет
+        br
+        input(name="plot", type="text") 
+    p дата релиза в мире
+        br
+        input(name="release_date", type="text")
+    p дата релиза в Бел
+        br
+        input(name="release_bel", type="text")
+    p дата релиза в Росс
+        br
+        input(name="release_rus", type="text")
+    p в ролях
+        br
+        input(name="in_roles", type="text")
+    p режиссер
+        br
+        input(name="director", type="text")
+    p превью
+        br
+        input(name="file" type="file")
+    br
+    button(type="submit") create
+    
+if films.lenght > 0
+    each film in films
+        a(href=`${uri}`)
+else
+    a фильмов нет

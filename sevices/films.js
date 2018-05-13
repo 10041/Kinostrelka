@@ -2,7 +2,7 @@ const CrudService = require("./crud");
 const fs = require('fs');
 
 const rootPath = require('app-root-path')
-const pathFolder = `${rootPath}\\image\\videos\\`;
+const pathFolder = `${rootPath}\\views\\images\\videos\\`;
 
 class FilmsService extends CrudService {
     constructor(filmsRepository, videosRepository, errors){

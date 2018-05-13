@@ -6,7 +6,7 @@ const rootPath = require('app-root-path')
 module.exports = (path) => {    
     const storage = multer.diskStorage({
         destination :function ( req , file , cb ) {
-            cb(null,  `${rootPath}/images/${path}`)
+            cb(null,  `${rootPath}/views/images/${path}`)
         },
         filename : function (req, file, cb){
             cb(null, `${uuidv4()}.${file.mimetype.split('/')[1]}`);
@@ -15,8 +15,9 @@ module.exports = (path) => {
     
     function fileFilter(req, file, cb){
         let mime = file.mimetype.split('/')[1];
-        if (mime === 'png' || 'jpeg' || 'jpg' || 'gif')
+        if (mime === 'png' || 'jpeg' || 'jpg' || 'gif'){
             cb(null, true);
+        }
         else
             cb(new Error(`${file.originalname} is not a PNG/JPEG file!`));
     }

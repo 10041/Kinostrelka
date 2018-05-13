@@ -1,7 +1,8 @@
 const CrudService = require("./crud");
 const fs = require("fs");
+
 const rootPath = require('app-root-path')
-const pathFolder = `${rootPath}\\image\\videos\\`;
+const pathFolder = `${rootPath}\\views\\images\\videos\\`;
 
 class VideosService extends CrudService {
     constructor(videosRepository, filmsRepository, errors){
@@ -18,7 +19,7 @@ class VideosService extends CrudService {
 
         return await super.update(id, {
 			...videoBeforeUpdate,
-			filmsId: filmId
+			filmId: filmId
 		});
     }
     async unbindVideo(id) {
@@ -28,7 +29,7 @@ class VideosService extends CrudService {
         }
         return await super.update(id, {
             ...videoBeforeUpdate,
-            filmsId: null
+            filmId: null
         })
     }
     async delete(id) {
@@ -41,7 +42,7 @@ class VideosService extends CrudService {
         const video = await super.read(id);
         fs.unlink(pathFolder + video.preview_path, (err) => {});
         await super.repository.update(data, { where: { id }, limit: 1 });
-        
+
 		return await this.read(id);
     }
 }

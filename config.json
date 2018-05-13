@@ -8,5 +8,6 @@
 	"cookie": {
 		"key": "secret key",
 		"auth": "__auth_id"
-	}
+	},
+	"uri" : "http://localhost:3000/"
 }

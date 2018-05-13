@@ -10,10 +10,10 @@ module.exports = (
     const router = express.Router();
 
     const videosController = require('./videos')(videosService, videosShema);
-    const filmsController = require('./films')(filmsService, filmsShema)
+    const filmsController = require('./films')(filmsService, filmsShema);
 
-    router.use("/video", videosController);
-    router.use('/film', filmsController);
+    router.use("/videos", videosController);
+    router.use('/films', filmsController);
 
     return router;
 }

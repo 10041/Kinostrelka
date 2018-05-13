@@ -1,11 +1,12 @@
 const CrudController = require("./crud");
-const imgMulter = require("../helpers/image")('videos');
+const imgMulter = require("../helpers/image")('films');
 
 class FilmsController extends CrudController{
     constructor(filmsService, filmsShema){
         super(filmsService, filmsShema);
 
         this.readVideos = this.readVideos.bind(this);
+        this.uploadImg = this.uploadImg.bind(this);
 
         this.routes = {
             ...this.routes,
@@ -13,8 +14,8 @@ class FilmsController extends CrudController{
               { method: "get", cb: this.readVideos }
             ]
         };
-        this.routes["/"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: super.schema.create});
-        this.routes["/:id"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: super.schema.update});
+        this.routes["/"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: this.schema.create});
+        this.routes["/:id"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: this.schema.update});
         this.registerRoutes();
     }
 
@@ -25,9 +26,8 @@ class FilmsController extends CrudController{
     }
     async uploadImg(req, res, next){
         console.log(req.file);
-        console.log(req.body);
         req.body.preview_path = req.file.filename
-        next();
+        res.send(await this.service.create(req.body));
     }
 }
 

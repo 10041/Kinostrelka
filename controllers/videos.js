@@ -7,18 +7,19 @@ class VideosController extends CrudController{
 
         this.bindVideo = this.bindVideo.bind(this);
         this.unbindVideo = this.unbindVideo.bind(this);
+        this.uploadImg = this.uploadImg.bind(this);
 
         this.routes = {
             ...this.routes,
             "/:id/film/:filmId": [
-                { method: "post", cb: this.bindVideo }
+                { method: "get", cb: this.bindVideo }
             ],
             "/:id/unbind": [
                 { method: "delete", cb: this.unbindVideo }
             ]
         };
-        this.routes["/"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg});
-        this.routes["/:id"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg});
+        this.routes["/"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: this.schema.create});
+        this.routes["/:id"].unshift({ method: "post", img: imgMulter, cb: this.uploadImg, schema: this.schema.update});
 
         this.registerRoutes();
     }
@@ -35,10 +36,9 @@ class VideosController extends CrudController{
     }
 
     async uploadImg(req, res, next){
-        console.log(req.file);
-        console.log(req.body);
+        console.log(req.file);        
         req.body.preview_path = req.file.filename
-        next();
+        res.send(await this.service.create(req.body));
     }
 }
 

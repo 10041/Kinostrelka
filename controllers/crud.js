@@ -62,8 +62,8 @@ class CrudController {
       for (let handler of handlers) {
         this.router[handler.method](
           route, 
-          joiValidator(handler.schema), 
           handler.img || next,
+          joiValidator(handler.schema), 
           asyncErrorHandler(handler.cb));
       }
     });
