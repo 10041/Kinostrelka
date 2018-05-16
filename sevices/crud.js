@@ -7,7 +7,7 @@ class CrudService {
 			readChunk: {
 				limit: 10,
 				page: 1,
-				order: "asc",
+				order: "desc",
 				orderField: "id"
 			}
 		};
@@ -23,13 +23,20 @@ class CrudService {
 		let limit = options.limit;
 		let offset = (options.page - 1) * options.limit;
 
-		return await repository.findAll({
+		let data = await repository.findAndCountAll({
 			where: { ...filter },
 			raw: true,
 			limit: limit,
 			offset: offset,
 			order: [[options.orderField, options.order.toUpperCase()]]
 		});
+
+		options.pages = Math.ceil(data.count / limit);
+
+		return {
+			data: data.rows,
+			meta: options,
+		}
 	}
 
 	async read(id) {

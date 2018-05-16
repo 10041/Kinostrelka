@@ -16,3 +16,65 @@
 </a>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="./site.css"> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/script.js" type='text/javascript'></script>
+    <title>kinostrelka</title>
+</head>
+<body>
+    <form action="/videos" method="POST" enctype="multipart/form-data">
+        <input name="file" type="file">
+        <input name="link" type="text">
+        <input name="preview_text" type="text">
+        <input type="submit">
+    </form>
+
+    <form action="http://localhost:3000/films/" method="POST" enctype="multipart/form-data">
+        название <br/>
+        <input id="name" name="name" type="text" />
+        <br/>
+        жанр<br/>
+        <input id="genre" name="genre" type="text" />
+        <br/>
+        страна<br/>
+        <input id="country" name="country" type="text" />
+        <br/>
+        возрастное ограничение<br/>
+        <input id="age_limit" name="age_limit" type="text" />
+        <br/>
+        сюжет<br/>
+        <input id="plot" name="plot" type="text" />
+        <br/>
+        дата релиза в мире<br/>
+        <input id="release_date" name="release_date" type="text" />
+        <br/>
+        дата релиза в Бел<br/>
+        <input id="release_bel" name="release_bel" type="text" />
+        <br/>
+        дата релиза в Росс<br/>
+        <input id="release_rus" name="release_rus" type="text" />
+        <br/>
+        в ролях<br/>
+        <input id="in_roles" name="in_roles" type="text" />
+        <br/>
+        режиссер<br/>
+        <input id="director" name="director" type="text" />
+        <br/>
+        превью<br/>
+        <input id="file" name="file" type="file" /><br/>
+        <input type="submit">
+    </form>
+
+    
+    <div id="pagination"/>
+    <hr>
+    <div id="films"/>
+
+</body>
+</html>

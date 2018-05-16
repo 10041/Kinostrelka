@@ -21,5 +21,6 @@ module.exports = (path) => {
         else
             cb(new Error(`${file.originalname} is not a PNG/JPEG file!`));
     }
+
     return multer({storage: storage, fileFilter}).single('file');
 } 

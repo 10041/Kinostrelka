@@ -30,7 +30,7 @@ class CrudController {
   }
 
   async readAll(req, resp) {
-    const result = await this.service.readChunk(req.params);
+    const result = await this.service.readChunk(req.query);
 
     resp.send(result);
   }
@@ -63,7 +63,7 @@ class CrudController {
         this.router[handler.method](
           route, 
           handler.img || next,
-          joiValidator(handler.schema), 
+          joiValidator(handler.schema),          
           asyncErrorHandler(handler.cb));
       }
     });

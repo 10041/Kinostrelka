@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require('path');
 
 const errors = require("./helpers/errors");
 
@@ -23,13 +24,17 @@ module.exports = (db, config) => {
         filmsShema,
     )
 
+    app.set("view engine", "pug");
     app.use(bodyParser.json());
+
+    //app.set('views', path.join(__dirname, 'views'));
     app.use("/", express.static(__dirname + '/views'));
-    app.use(express.static(__dirname + './images/films'));
-    app.use(express.static(__dirname + './images/videos'));
 
     app.use("/", apiController);
     app.use("/", error);
-
+    
+    app.use("/", async (req, res) => {
+        res.render("index", {__dirname});
+    })
     return app;
 }

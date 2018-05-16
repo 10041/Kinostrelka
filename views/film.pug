@@ -1,0 +1,32 @@
+
+script(type="text/javascript" src=`/film.js`)
+
+form(action='/videos', method='POST', enctype='multipart/form-data')
+        | превью 
+        br
+        input#file(name='file', type='file')
+        br
+        | ссылка
+        br
+        input#link(name='link', type='text')
+        br
+        | текст на превью
+        br
+        input#preview_text(name='preview_text', type='text')
+        br
+        input#filmId(name='filmId', type='hidden' value=`${film.id}`)        
+        input(type='submit')
+        hr
+
+h1 #{film.name}
+p #{videos.lenght}
+
+each video in videos
+    img(src=`/images/videos/${video.preview_path}` height = 50 width = 50)
+    p #{video.link}
+    p #{video.preview_text}
+    br
+//- if videos.lenght > 0
+    
+//- else
+//-     a трейлеров нет

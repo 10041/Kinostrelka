@@ -1,53 +1,63 @@
-h1 Hello bleat
-
-script(src="https://unpkg.com/axios/dist/axios.min.js")
-
-script(type="text/javascript")
-    -console.log('hello');
-
-script(type="text/javascript" src=`${__dirname}views/script.js`)
-
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    // <link rel="stylesheet" href="./site.css">
+    //script(src='https://unpkg.com/axios/dist/axios.min.js')
     
+    script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js")
+    script(type='text/javascript' src=`/script.js`)
+    title kinostrelka
+  body(onload='getFilms()')
 
-form(action=`${uri}films/` method="POST" enctype="multipart/form-data")
-    p название 
-        br
-        input(name="name_film", type="text")
-    p жанр
-        br 
-        input(name="genre", type="text")
-    p страна
-        br
-        input(name="country", type="text")
-    p возрастное ограничение
-        br
-        input(name="age_limit", type="text")
-    p сюжет
-        br
-        input(name="plot", type="text") 
-    p дата релиза в мире
-        br
-        input(name="release_date", type="text")
-    p дата релиза в Бел
-        br
-        input(name="release_bel", type="text")
-    p дата релиза в Росс
-        br
-        input(name="release_rus", type="text")
-    p в ролях
-        br
-        input(name="in_roles", type="text")
-    p режиссер
-        br
-        input(name="director", type="text")
-    p превью
-        br
-        input(name="file" type="file")
-    br
-    button(type="submit") create
-    
-if films.lenght > 0
-    each film in films
-        a(href=`${uri}`)
-else
-    a фильмов нет
+    form(action='/films/', method='POST', enctype='multipart/form-data')
+      |название 
+      br
+      input#name(name='name', type='text')
+      br
+      |жанр
+      br
+      input#genre(name='genre', type='text')
+      br
+      |страна
+      br
+      input#country(name='country', type='text')
+      br
+      |возрастное ограничение
+      br
+      input#age_limit(name='age_limit', type='text')
+      br
+      |сюжет
+      br
+      input#plot(name='plot', type='text')
+      br
+      |дата релиза в мире
+      br
+      input#release_date(name='release_date', type='text')
+      br
+      |дата релиза в Бел
+      br
+      input#release_bel(name='release_bel', type='text')
+      br
+      |дата релиза в Росс
+      br
+      input#release_rus(name='release_rus', type='text')
+      br
+      |в ролях
+      br
+      input#in_roles(name='in_roles', type='text')
+      br
+      |режиссер
+      br
+      input#director(name='director', type='text')
+      br
+      |превью
+      br
+      input#file(name='file', type='file')
+      br
+      input(type='submit')
+      hr
+
+    #films
+    #pagination
+    #test
