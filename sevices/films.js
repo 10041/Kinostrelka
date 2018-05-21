@@ -1,5 +1,7 @@
 const CrudService = require("./crud");
 const fs = require('fs');
+const Op = require("sequelize").Op;
+
 
 const rootPath = require('app-root-path')
 const pathFolder = `${rootPath}\\views\\images\\videos\\`;
@@ -38,6 +40,15 @@ class FilmsService extends CrudService {
         await super.repository.update(data, { where: { id }, limit: 1 });
         
 		return await this.read(id);
+    }
+    async find(name) {
+        return await this.repository.findAll({
+            where: {
+				name:{
+					[Op.like]: `%${name}%`
+				}
+            }
+        });
     }
 }
 

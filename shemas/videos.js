@@ -1,7 +1,7 @@
 const joi = require('joi');
 
 const defaultSchema = {
-  filmId: joi.number().min(0),
+  filmId: joi.number().min(0).required(),
   link: joi.string().required(),
   preview_text: joi.string().required(),
     

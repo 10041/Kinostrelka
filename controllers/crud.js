@@ -13,7 +13,7 @@ class CrudController {
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
-
+    
     this.router = express.Router();
 
     this.routes = {
@@ -53,6 +53,7 @@ class CrudController {
     resp.send(await this.service.delete(req.params.id));
   }
 
+  
   registerRoutes() {
     Object.keys(this.routes).forEach((route) => {
       let handlers = this.routes[route];

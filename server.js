@@ -27,8 +27,10 @@ module.exports = (db, config) => {
     app.set("view engine", "pug");
     app.use(bodyParser.json());
 
-    //app.set('views', path.join(__dirname, 'views'));
+
     app.use("/", express.static(__dirname + '/views'));
+
+
 
     app.use("/", apiController);
     app.use("/", error);

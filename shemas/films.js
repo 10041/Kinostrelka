@@ -38,7 +38,7 @@ const notRequiredSchema = {
     producer: joi.string(),
     company: joi.string(),
     file: joi.object()
-}
+};
 
 const onlyIdSchema = {
     id: joi
@@ -47,13 +47,21 @@ const onlyIdSchema = {
         .required()
 };
 
+const find = {
+    name: joi.string().required()
+};
+
 module.exports = {
     read: {
       params: onlyIdSchema
     },
   
     readAll: {},
-  
+    
+    find: {
+      query: find
+    },
+
     create: {
       body: defaultSchema
     },

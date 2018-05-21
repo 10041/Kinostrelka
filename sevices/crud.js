@@ -1,3 +1,5 @@
+const Op = require("sequelize").Op;
+
 class CrudService {
 	constructor(repository, errors) {
 		this.repository = repository;
@@ -73,6 +75,16 @@ class CrudService {
 		id = parseInt(id);
 		return await this.repository.destroy({ where: { id } });
 	}
+
+	async find(name) {
+        return await this.repository.findAll({
+            where: {
+				name:{
+					[Op.like]: `%${name}%`
+				}
+            }
+        });
+    }
 }
 
 module.exports = CrudService;
