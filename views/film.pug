@@ -1,5 +1,6 @@
 
 script(type="text/javascript" src=`/film.js`)
+script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js")
 
 form(action='/videos', method='POST', enctype='multipart/form-data')
         | превью 
@@ -18,15 +19,63 @@ form(action='/videos', method='POST', enctype='multipart/form-data')
         input(type='submit')
         hr
 
-h1 #{film.name}
-p #{videos.lenght}
+h1#filmName #{film.name}
 
-each video in videos
-    img(src=`/images/videos/${video.preview_path}` height = 50 width = 50)
-    p #{video.link}
-    p #{video.preview_text}
-    br
-//- if videos.lenght > 0
-    
-//- else
-//-     a трейлеров нет
+if videos.length > 0
+    each video in videos
+        img(src=`/images/videos/${video.preview_path}` height = 50 width = 50)
+        p #{video.link}
+        p #{video.preview_text}
+        br
+else
+    p трейлеров нет
+
+
+//- |название 
+//- br
+//- input#name(name='name', type='text' value=`${film.name}`)
+//- br
+//- |жанр
+//- br
+//- input#genre(name='genre', type='text' value=`${film.genre}`)
+//- br
+//- |страна
+//- br
+//- input#country(name='country', type='text' value=`${film.country}`)
+//- br
+//- |возрастное ограничение
+//- br
+//- input#age_limit(name='age_limit', type='text' value=`${film.age_limit}`)
+//- br
+//- |сюжет
+//- br
+//- input#plot(name='plot', type='text' value=`${film.plot}`)
+//- br
+//- |дата релиза в мире
+//- br
+//- input#release_date(name='release_date', type='text' value=`${film.release_date}`)
+//- br
+//- |дата релиза в Бел
+//- br
+//- input#release_bel(name='release_bel', type='text' value=`${film.release_bel}`)
+//- br
+//- |дата релиза в Росс
+//- br
+//- input#release_rus(name='release_rus', type='text' value=`${film.release_rus}`)
+//- br
+//- |в ролях
+//- br
+//- input#in_roles(name='in_roles', type='text' value=`${film.in_roles}`)
+//- br
+//- |режиссер
+//- br
+//- input#director(name='director', type='text' value=`${film.director}`)
+//- br
+//- |превью
+//- br
+//- img(src=`/images/films/${film.preview_path}`)
+//- br
+//- input#file(name='file', type='file')
+//- br
+//- button(onclick='updateFilm()')
+//-     |update info

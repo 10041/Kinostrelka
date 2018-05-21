@@ -1,12 +1,13 @@
 module.exports = (Sequelize, sequelize) => {
     return sequelize.define("users", {
-      id: {
+      dbId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      login: Sequelize.STRING,
-      mame: Sequelize.STRING,
+      id: Sequelize.INTEGER,
+      first_name: Sequelize.STRING,
+      last_name: Sequelize.STRING
       //avatar: Sequelize
       
     });

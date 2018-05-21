@@ -37,7 +37,7 @@ class VideosService extends CrudService {
         if(isEmpty(video.preview_path))
             fs.unlink(pathFolder + video.preview_path, (err) => {});
 
-        return await super.repository.destroy({ where: { id } });
+        return await this.repository.destroy({ where: { id } });
     }
     async update(id, data) {
         const video = await super.read(id);
@@ -45,7 +45,7 @@ class VideosService extends CrudService {
         if(isEmpty(video.preview_path))
             fs.unlink(pathFolder + video.preview_path, (err) => {});
             
-        await super.repository.update(data, { where: { id }, limit: 1 });
+        await this.repository.update(data, { where: { id }, limit: 1 });
 
 		return await this.read(id);
     }

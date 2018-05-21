@@ -1,4 +1,3 @@
-const Op = require("sequelize").Op;
 
 class CrudService {
 	constructor(repository, errors) {
@@ -76,15 +75,7 @@ class CrudService {
 		return await this.repository.destroy({ where: { id } });
 	}
 
-	async find(name) {
-        return await this.repository.findAll({
-            where: {
-				name:{
-					[Op.like]: `%${name}%`
-				}
-            }
-        });
-    }
+	
 }
 
 module.exports = CrudService;

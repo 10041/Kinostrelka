@@ -5,7 +5,6 @@ module.exports = (Sequelize, sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
-      message: Sequelize.STRING,
-      
+      message: Sequelize.TEXT,
     });
   };
