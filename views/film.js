@@ -1,3 +1,34 @@
+
+
+ function getComments(){
+    $.get(`/comments/film/${$('#filmId').val()}`, resp => {
+        let resStr = '';
+        resp.forEach(el => {
+            resStr += ` <p>
+                            <img src=${el.user.photo} height = 25 width = 25 />
+                            ${el.user.first_name}
+                            <br>
+                            ${el.message}
+                        <p/>`;
+        });
+        $('#comments').empty().append(resStr);
+    });
+ }
+
+ function sendComment(){
+     if($('#commArea').val() != '') {
+        axios.post(`/comments`, {
+            filmId: `${$('#filmId').val()}`,
+            userId: `${$('#userId').val()}`,
+            message: `${$('#commArea').val()}`
+        })
+        .then((resp) =>{
+            console.log(resp);
+            getComments();
+        });
+     }
+ }
+
 function updateFilm (){
     // body = {
     //     name: $('#name'),

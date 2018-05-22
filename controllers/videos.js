@@ -35,9 +35,7 @@ class VideosController extends CrudController{
         resp.send(await this.service.unbindVideo(id));
     }
 
-    async uploadImg(req, res, next){
-        console.log(req.file);
-        console.log(req.body);        
+    async uploadImg(req, res, next){      
         req.body.preview_path = req.file.filename || ''
         res.send(await this.service.create(req.body));
     }

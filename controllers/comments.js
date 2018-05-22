@@ -6,10 +6,11 @@ class CommentsController extends CrudController{
 
         this.readComments = this.readComments.bind(this);
         this.routes = {
-            ...this.routes,
+            
             "/film/:id/": [
                 { method: "get", cb: this.readComments, schema: this.schema.read }
-            ]
+            ],
+            ...this.routes,
         }
         this.registerRoutes();
     }

@@ -7,7 +7,7 @@ class CommentsService extends CrudService {
         this.filmsRepository = filmsRepository;
     }
     async getFilmComments(filmId){
-        const film = await super.read(filmId);
+        const film = await this.filmsRepository.findById(filmId);
 
         if(!film) {
             this.errors.notFound;

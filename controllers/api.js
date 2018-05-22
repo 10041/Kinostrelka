@@ -14,8 +14,8 @@ module.exports = (
     const router = express.Router();
 
     const videosController = require('./videos')(videosService, videosShema);
-    const filmsController = require('./films')(filmsService, filmsShema);
     const usersController = require('./users')(usersService, usersShema);
+    const filmsController = require('./films')(filmsService, filmsShema, usersService);
     const commentsController = require('./comments')(commentsService, commentsShema);
 
     router.use("/videos", videosController);

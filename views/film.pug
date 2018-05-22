@@ -1,36 +1,59 @@
 
-script(type="text/javascript" src=`/film.js`)
+
 script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js")
+script(src="https://unpkg.com/axios/dist/axios.min.js")
+script(type="text/javascript" src=`/film.js`)
 
-form(action='/videos', method='POST', enctype='multipart/form-data')
-        | превью 
-        br
-        input#file(name='file', type='file')
-        br
-        | ссылка
-        br
-        input#link(name='link', type='text')
-        br
-        | текст на превью
-        br
-        input#preview_text(name='preview_text', type='text')
-        br
-        input#filmId(name='filmId', type='hidden' value=`${film.id}`)        
-        input(type='submit')
-        hr
+body(onload='getComments()')
 
-h1#filmName #{film.name}
-
-if videos.length > 0
-    each video in videos
-        img(src=`/images/videos/${video.preview_path}` height = 50 width = 50)
-        p #{video.link}
-        p #{video.preview_text}
+    if user.type != 'anon'
+        img(src=`${user.photo}`)
+        b #{user.first_name}
         br
-else
-    p трейлеров нет
+        a(href='/auth/logout')
+            | выйти
+    else
+        a(href = '/auth/vk')
+            | войти
+        br
 
+    if user.type == 'admin'
+        form(action='/videos', method='POST', enctype='multipart/form-data')
+            | превью 
+            br
+            input#file(name='file', type='file')
+            br
+            | ссылка
+            br
+            input#link(name='link', type='text')
+            br
+            | текст на превью
+            br
+            input#preview_text(name='preview_text', type='text')
+            br      
+            input(type='submit')
+            hr
 
+    h1#filmName #{film.name}
+
+    input#filmId(name='filmId', type='hidden' value=`${film.id}`) 
+
+    if videos.length > 0
+        each video in videos
+            img(src=`/images/videos/${video.preview_path}` height = 50 width = 50)
+            p #{video.link}
+            p #{video.preview_text}
+            br
+    else
+        p трейлеров нет
+
+    if user.type != 'anon'
+        input#userId(name='userId', type='hidden' value=`${user.dbId}`) 
+        textarea#commArea(name="commArea", cols="35", rows="4")
+        br
+        button(onclick='sendComment()')
+            | отправить
+    #comments
 //- |название 
 //- br
 //- input#name(name='name', type='text' value=`${film.name}`)

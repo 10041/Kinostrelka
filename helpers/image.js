@@ -1,6 +1,6 @@
 const uuidv4 = require('uuid-v4');
 const multer = require('multer');
-const rootPath = require('app-root-path')
+const rootPath = require('app-root-path');
 
 
 module.exports = (path) => {    

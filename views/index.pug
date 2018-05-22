@@ -9,11 +9,23 @@ html(lang='en')
     script(type='text/javascript' src=`/script.js`)
     title kinostrelka
   body(onload='getFilms(1)')
-
-    form(action='/films/', method='POST', enctype='multipart/form-data')
+    if user.type != 'anon'
+      img(src=`${user.photo}`)
+      b #{user.first_name}
+      br
+      a(href='/auth/logout')
+        | выйти
+    else
+      a(href = '/auth/vk')
+        | войти
+    br
+    
+    if user.type == 'admin'
+      form(action='/films/', method='POST', enctype='multipart/form-data')
       include filmForm.pug
       input(type='submit')
       hr
+    
 
     input#search(name='search' type='text')
     button(onclick='searchFilm()')

@@ -37,8 +37,8 @@ function searchFilm(){
 
 
 function addLinkFilm(film){
-    return `<a href = '/films/${film.id}/videos'>
-        <img src = '/images/films/${film.preview_path}' height = 50 width = 50 />
-        ${film.name}
-    <a/><br>`;
+    return  `<a href = '/films/${film.id}/videos'>
+                <img src = '/images/films/${film.preview_path}' height = 300 width = 200 />
+                ${film.name}
+            <a/><br>`;
 }

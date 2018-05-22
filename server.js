@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+
 
 const errors = require("./helpers/errors");
 
@@ -17,6 +21,8 @@ module.exports = (db, config) => {
     const usersService = new UsersService(db.users, db.comments, errors);
     const commentsService = new CommentsService(db.comments, db.users, db.films, errors);
 
+    const passport = require('./helpers/authVk')(usersService);
+    const auth = require('./controllers/auth')(usersService);
 
     const videosShema = require('./shemas/videos');
     const filmsShema = require('./shemas/films');
@@ -38,15 +44,34 @@ module.exports = (db, config) => {
     )
 
     app.set("view engine", "pug");
+
     app.use(bodyParser.json());
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
 
     app.use("/", express.static(__dirname + '/views'));
+
+    app.use("/auth", auth);
 
     app.use("/", apiController);
     app.use("/", error);
     
     app.use("/", async (req, res) => {
-        res.render("index", {__dirname});
+        const userFromReq = req.user;
+        if(userFromReq){
+            const user = await usersService.readForSpId(userFromReq.id);
+            res.render("index", {user});
+        }
+        else    
+            res.render("index", {user: {type: 'anon'}});
     })
     return app;
 }
