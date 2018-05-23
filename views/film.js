@@ -4,9 +4,11 @@
     $.get(`/comments/film/${$('#filmId').val()}`, resp => {
         let resStr = '';
         resp.forEach(el => {
+
             resStr += ` <p>
                             <img src=${el.user.photo} height = 25 width = 25 />
                             ${el.user.first_name}
+                            ${getDate(el.updatedAt)}
                             <br>
                             ${el.message}
                         <p/>`;
@@ -28,6 +30,12 @@
         });
      }
  }
+
+function getDate(dateStr) {
+    let date = new Date(dateStr);
+    var options = { year:"numeric", month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit" };
+    return date.toLocaleDateString('en-US', options);
+} 
 
 function updateFilm (){
     // body = {
