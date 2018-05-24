@@ -25,7 +25,7 @@ html(lang='en')
             | войти
 
     if user.type == 'admin'
-        form( class="form-control" action='/videos/', method='POST')
+        div(class="form-control")
             input#filmId(name='filmId', type='hidden' value=`${film.id}`)
             | ссылка
             br
@@ -34,15 +34,17 @@ html(lang='en')
             | текст на превью
             br
             input#preview_text(name='preview_text', type='text')
+            br
             br      
-            input(type='submit' value='добавить')
+            button( class="btn btn-outline-secondary" onclick='addVideo()')
+              | добавить
     else
         input#filmId(name='filmId', type='hidden' value=`${film.id}`) 
     
     h1#filmName(class="display-4") #{film.name}
     hr
     
-
+    #videoPlace(style="margin-left: 10%; margin-right: auto")
     if videos.length > 0
         each video in videos
             div(style="margin-left: 10%; margin-right: auto")

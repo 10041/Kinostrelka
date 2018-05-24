@@ -31,6 +31,32 @@
      }
  }
 
+ function addVideo(){
+    console.log($('#filmId').val());
+    console.log($('#link').val());
+    console.log($('#preview_text').val());
+
+    if($('#filmId').val()!=''&& $('#link').val()!=''&& $('#preview_text').val()!='') {
+        axios.post('/videos', {
+            filmId:         $('#filmId').val(),
+            link:           $('#link').val(),
+            preview_text:   $('#preview_text').val(),
+        })
+        .then((resp) => {
+            console.log(resp);
+            let iframe = `
+            <iframe width="640" height="360" src="${resp.data.link}" allowfullscreen="allowfullscreen"></iframe>
+            <br>
+            <small>${resp.data.preview_text}</small><br>
+            `;
+            $('#videoPlace').append(iframe);
+        })
+        .catch((err) => {alert(err)});
+    }
+    else
+        alert('все поля должны быть заполнены');
+ }
+
 function getDate(dateStr) {
     let date = new Date(dateStr);
     var options = { year:"numeric", month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit" };
