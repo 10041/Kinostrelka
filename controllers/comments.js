@@ -18,6 +18,13 @@ class CommentsController extends CrudController{
     async readComments(req, res) {
         res.send(await this.service.getFilmComments(req.params.id));
     }
+    async create(req, resp) {
+        if(req.ability === 'anon'){
+            resp.send('anon user access denied');
+            return;
+        }
+        resp.send(await this.service.create(req.body));
+    }
 }
 
 module.exports = (commentsService, commentsShema) => {

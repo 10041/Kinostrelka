@@ -42,14 +42,26 @@ class CrudController {
   }
 
   async create(req, resp) {
+    if(req.ability !== 'admin'){
+      resp.send('access denied');
+      return;
+    }
     resp.send(await this.service.create(req.body));
   }
 
   async update(req, resp) {
+    if(req.ability !== 'admin'){
+      resp.send('access denied');
+      return;
+    }
     resp.send(await this.service.update(req.params.id, req.body));
   }
 
   async delete(req, resp) {
+    if(req.ability !== 'admin'){
+      resp.send('access denied');
+      return;
+    }
     await this.service.delete(req.params.id)
     resp.send('done');
   }

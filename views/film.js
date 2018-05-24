@@ -29,13 +29,11 @@
             getComments();
         });
      }
+     else
+        alert('Введите текст комментария');
  }
 
  function addVideo(){
-    console.log($('#filmId').val());
-    console.log($('#link').val());
-    console.log($('#preview_text').val());
-
     if($('#filmId').val()!=''&& $('#link').val()!=''&& $('#preview_text').val()!='') {
         axios.post('/videos', {
             filmId:         $('#filmId').val(),

@@ -23,6 +23,7 @@ module.exports = (db, config) => {
 
     const passport = require('./helpers/authVk')(usersService);
     const auth = require('./controllers/auth')(usersService);
+    const authorization = require('./controllers/authorization')(usersService)
 
     const videosShema = require('./shemas/videos');
     const filmsShema = require('./shemas/films');
@@ -60,7 +61,7 @@ module.exports = (db, config) => {
     app.use("/", express.static(__dirname + '/views'));
 
     app.use("/auth", auth);
-
+    app.use(authorization);
     app.use("/", apiController);
     app.use("/", error);
     

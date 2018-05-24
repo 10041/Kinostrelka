@@ -25,12 +25,20 @@ class VideosController extends CrudController{
     }
 
     async bindVideo(req, resp) {
+        if(req.ability !== 'admin'){
+            resp.send('access denied');
+            return;
+        }
         const filmId = req.params.filmId;
         const id = req.params.id;
         resp.send(await this.service.bindVideo(id, filmId));
     }
     
     async unbindVideo(req, resp) {
+        if(req.ability !== 'admin'){
+            resp.send('access denied');
+            return;
+        }
         const id = req.params.id;
         resp.send(await this.service.unbindVideo(id));
     }
