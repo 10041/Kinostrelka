@@ -61,6 +61,10 @@ module.exports = (db, config) => {
 
     app.use("/auth", auth);
 
+    app.use("/", (req, res, next) => {
+        console.log(req.body);
+        next();
+    });
     app.use("/", apiController);
     app.use("/", error);
     

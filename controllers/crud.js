@@ -50,7 +50,8 @@ class CrudController {
   }
 
   async delete(req, resp) {
-    resp.send(await this.service.delete(req.params.id));
+    await this.service.delete(req.params.id)
+    resp.send('done');
   }
 
   

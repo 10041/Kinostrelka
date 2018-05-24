@@ -5,8 +5,8 @@
         let resStr = '';
         resp.forEach(el => {
 
-            resStr += ` <p>
-                            <img src=${el.user.photo} height = 25 width = 25 />
+            resStr += ` <p style="margin-left: 10%;  margin-right: auto ">
+                            <img src=${el.user.photo} height = 35 width = 35 style="border: solid 1px transparent;border-radius: 50%;height: 90%;margin: 0.2% 0 0 0.2%;position: relative;"/>
                             ${el.user.first_name}
                             ${getDate(el.updatedAt)}
                             <br>
@@ -25,7 +25,7 @@
             message: `${$('#commArea').val()}`
         })
         .then((resp) =>{
-            console.log(resp);
+            $('#commArea').empty().append('');
             getComments();
         });
      }
